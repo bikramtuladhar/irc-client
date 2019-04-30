@@ -139,6 +139,16 @@ public class EditServerActivity extends ThemedActivity {
         setContentView(R.layout.activity_edit_server);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        findViewById(R.id.server_name).setEnabled(false);
+        findViewById(R.id.server_name_ctr).setEnabled(false);
+        findViewById(R.id.server_address_name).setEnabled(false);
+        findViewById(R.id.server_address_name_ctr).setEnabled(false);
+        findViewById(R.id.server_address_port).setEnabled(false);
+        findViewById(R.id.server_address_port_ctr).setEnabled(false);
+        findViewById(R.id.server_ssl_checkbox).setEnabled(false);
+        findViewById(R.id.server_ssl_certs).setEnabled(false);
+        findViewById(R.id.server_ssl_cert_lbl).setEnabled(false);
+
         mServerName = findViewById(R.id.server_name);
         mServerNameCtr = findViewById(R.id.server_name_ctr);
         mServerAddress = findViewById(R.id.server_address_name);

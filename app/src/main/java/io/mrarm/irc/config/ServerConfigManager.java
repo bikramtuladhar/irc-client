@@ -25,13 +25,13 @@ public class ServerConfigManager {
 
     private static final String TAG = "ServerConfigManager";
 
-    private static final String SERVERS_PATH = "servers";
-    private static final String SERVER_FILE_PREFIX = "server-";
-    private static final String SERVER_FILE_SUFFIX = ".json";
-    private static final String SERVER_CERTS_FILE_PREFIX = "server-certs-";
-    private static final String SERVER_CERTS_FILE_SUFFIX = ".jks";
-    private static final String SERVER_LOGS_PATH = "chat-logs";
-    private static final String SERVER_MISC_DATA_FILENAME = "misc-data.db";
+    public static final String SERVERS_PATH = "servers";
+    public static final String SERVER_FILE_PREFIX = "server-";
+    public static final String SERVER_FILE_SUFFIX = ".json";
+    public static final String SERVER_CERTS_FILE_PREFIX = "server-certs-";
+    public static final String SERVER_CERTS_FILE_SUFFIX = ".jks";
+    public static final String SERVER_LOGS_PATH = "chat-logs";
+    public static final String SERVER_MISC_DATA_FILENAME = "misc-data.db";
 
     public static ServerConfigManager getInstance(Context context) {
         if (mInstance == null)

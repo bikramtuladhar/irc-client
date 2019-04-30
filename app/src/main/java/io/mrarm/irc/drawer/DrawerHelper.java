@@ -35,7 +35,7 @@ public class DrawerHelper implements ServerConnectionManager.ConnectionsListener
     private LinearLayoutManager mLayoutManager;
     private DrawerMenuListAdapter mAdapter;
     private DrawerMenuItem mSearchItem;
-    private DrawerMenuItem mManageServersItem;
+//    private DrawerMenuItem mManageServersItem;
     private DrawerMenuItem mSettingsItem;
     private boolean mHasRegisteredListeners = false;
 
@@ -59,8 +59,8 @@ public class DrawerHelper implements ServerConnectionManager.ConnectionsListener
             mDrawerLayout.closeDrawers();
         });
         mAdapter.addTopMenuItem(mSearchItem);
-        mManageServersItem = new DrawerMenuItem(r.getString(R.string.action_servers), R.drawable.ic_edit);
-        mAdapter.addMenuItem(mManageServersItem);
+//        mManageServersItem = new DrawerMenuItem(r.getString(R.string.action_servers), R.drawable.ic_edit);
+//        mAdapter.addMenuItem(mManageServersItem);
         mSettingsItem = new DrawerMenuItem(r.getString(R.string.action_settings), R.drawable.ic_settings);
         mSettingsItem.setOnClickListener((View view) -> {
             activity.startActivity(new Intent(activity, SettingsActivity.class));
@@ -137,9 +137,9 @@ public class DrawerHelper implements ServerConnectionManager.ConnectionsListener
         mAdapter.setChannelClickListener(listener);
     }
 
-    public DrawerMenuItem getManageServersItem() {
-        return mManageServersItem;
-    }
+//    public DrawerMenuItem getManageServersItem() {
+//        return mManageServersItem;
+//    }
 
     public void setSelectedChannel(ServerConnectionInfo server, String channel) {
         mAdapter.setSelectedChannel(server, channel);

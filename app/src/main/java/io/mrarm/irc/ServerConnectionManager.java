@@ -404,14 +404,14 @@ public class ServerConnectionManager {
 
     }
 
-    private static class ConnectedServerInfo {
+    public static class ConnectedServerInfo {
 
         public UUID uuid;
         public List<String> channels;
 
     }
 
-    private static class ConnectedServersList {
+    public static class ConnectedServersList {
 
         public List<ConnectedServerInfo> servers;
 

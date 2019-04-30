@@ -36,10 +36,10 @@ public class ServerListFragment extends Fragment {
 
         ((MainActivity) getActivity()).addActionBarDrawerToggle(toolbar);
 
-        FloatingActionButton addFab = rootView.findViewById(R.id.fab);
-        addFab.setOnClickListener((View view) -> {
-            startActivity(new Intent(getContext(), EditServerActivity.class));
-        });
+//        FloatingActionButton addFab = rootView.findViewById(R.id.fab);
+//        addFab.setOnClickListener((View view) -> {
+//            startActivity(new Intent(getContext(), EditServerActivity.class));
+//        });
 
         RecyclerView recyclerView = rootView.findViewById(R.id.server_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -61,11 +61,11 @@ public class ServerListFragment extends Fragment {
                 startActivity(EditServerActivity.getLaunchIntent(getContext(), data));
                 return true;
             });
-            menu.addItem(R.string.action_clone, R.drawable.ic_content_copy, (MenuBottomSheetDialog.Item item) -> {
-                ServerConfigData data = ServerConfigManager.getInstance(getContext()).findServer(info.getUUID());
-                startActivity(EditServerActivity.getLaunchIntent(getContext(), data, true));
-                return true;
-            });
+//            menu.addItem(R.string.action_clone, R.drawable.ic_content_copy, (MenuBottomSheetDialog.Item item) -> {
+//                ServerConfigData data = ServerConfigManager.getInstance(getContext()).findServer(info.getUUID());
+//                startActivity(EditServerActivity.getLaunchIntent(getContext(), data, true));
+//                return true;
+//            });
             menu.addItem(R.string.action_disconnect_and_close, R.drawable.ic_close, (MenuBottomSheetDialog.Item item) -> {
                 info.disconnect();
                 ServerConnectionManager.getInstance(getContext()).removeConnection(info);
@@ -87,10 +87,10 @@ public class ServerListFragment extends Fragment {
                 startActivity(EditServerActivity.getLaunchIntent(getContext(), data));
                 return true;
             });
-            menu.addItem(R.string.action_clone, R.drawable.ic_content_copy, (MenuBottomSheetDialog.Item item) -> {
-                startActivity(EditServerActivity.getLaunchIntent(getContext(), data, true));
-                return true;
-            });
+//            menu.addItem(R.string.action_clone, R.drawable.ic_content_copy, (MenuBottomSheetDialog.Item item) -> {
+//                startActivity(EditServerActivity.getLaunchIntent(getContext(), data, true));
+//                return true;
+//            });
             menu.addItem(R.string.action_delete, R.drawable.ic_delete, (MenuBottomSheetDialog.Item item) -> {
                 AlertDialog.Builder builder2 = new AlertDialog.Builder(getContext());
                 builder2.setTitle(R.string.action_delete_confirm_title);

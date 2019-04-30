@@ -9,10 +9,13 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.ParcelFileDescriptor;
 import android.provider.OpenableColumns;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.tabs.TabLayout;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.core.view.GravityCompat;
@@ -20,10 +23,12 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AlertDialog;
 
 import android.os.Bundle;
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -33,7 +38,10 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Date;
@@ -49,13 +57,22 @@ import io.mrarm.irc.chat.ChannelInfoAdapter;
 import io.mrarm.irc.chat.ChatFragment;
 import io.mrarm.irc.config.AppSettings;
 import io.mrarm.irc.config.ChatSettings;
+import io.mrarm.irc.config.ServerConfigData;
+import io.mrarm.irc.config.ServerConfigManager;
+import io.mrarm.irc.config.SettingsHelper;
 import io.mrarm.irc.dialog.UserSearchDialog;
 import io.mrarm.irc.drawer.DrawerHelper;
 import io.mrarm.irc.util.NightModeRecreateHelper;
+import io.mrarm.irc.util.ServerHelper;
 import io.mrarm.irc.util.StyledAttributesHelper;
 import io.mrarm.irc.util.WarningHelper;
 import io.mrarm.irc.view.ChipsEditText;
 import io.mrarm.irc.view.LockableDrawerLayout;
+
+import static io.mrarm.irc.ServerConnectionManager.CONNECTED_SERVERS_FILE_PATH;
+import static io.mrarm.irc.config.ServerConfigManager.SERVERS_PATH;
+import static io.mrarm.irc.config.ServerConfigManager.SERVER_FILE_PREFIX;
+import static io.mrarm.irc.config.ServerConfigManager.SERVER_FILE_SUFFIX;
 
 public class MainActivity extends ThemedActivity implements IRCApplication.ExitCallback {
 
@@ -113,6 +130,7 @@ public class MainActivity extends ThemedActivity implements IRCApplication.ExitC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        addIfEmpty();
         mFakeToolbar = findViewById(R.id.fake_toolbar);
 
         mDrawerLayout = findViewById(R.id.drawer_layout);
@@ -128,10 +146,10 @@ public class MainActivity extends ThemedActivity implements IRCApplication.ExitC
             else
                 openServer(server, channel);
         });
-        mDrawerHelper.getManageServersItem().setOnClickListener((View v) -> {
-            mDrawerLayout.closeDrawers();
-            openManageServers();
-        });
+//        mDrawerHelper.getManageServersItem().setOnClickListener((View v) -> {
+//            mDrawerLayout.closeDrawers();
+//            openManageServers();
+//        });
 
         if (AppSettings.isDrawerPinned())
             mDrawerLayout.setLocked(true);
@@ -146,6 +164,17 @@ public class MainActivity extends ThemedActivity implements IRCApplication.ExitC
             return;
 
         handleIntent(getIntent());
+    }
+
+    private void addIfEmpty() {
+
+        File mServersPath = new File(getFilesDir(), SERVERS_PATH);
+
+        File[] files = mServersPath.listFiles();
+        if (!mServersPath.exists() || files.length == 0) {
+            ServerHelper.save(this);
+        }
+
     }
 
     private void handleIntent(Intent intent) {
@@ -183,7 +212,7 @@ public class MainActivity extends ThemedActivity implements IRCApplication.ExitC
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         StyledAttributesHelper ta = StyledAttributesHelper.obtainStyledAttributes(this,
-                new int[] { R.attr.actionBarSize });
+                new int[]{R.attr.actionBarSize});
         ViewGroup.LayoutParams params = mFakeToolbar.getLayoutParams();
         params.height = ta.getDimensionPixelSize(R.attr.actionBarSize, 0);
         mFakeToolbar.setLayoutParams(params);
@@ -320,7 +349,7 @@ public class MainActivity extends ThemedActivity implements IRCApplication.ExitC
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 .replace(R.id.content_frame, ServerListFragment.newInstance())
                 .commit();
-        mDrawerHelper.setSelectedMenuItem(mDrawerHelper.getManageServersItem());
+//        mDrawerHelper.setSelectedMenuItem(mDrawerHelper.getManageServersItem());
         mBackReturnToServerList = false;
     }
 

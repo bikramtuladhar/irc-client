@@ -50,7 +50,7 @@ ChatSettings:
     - spec: String font = "default"
       getter: getFontString
     - spec: int fontSize = -1
-    - spec: boolean textAutocorrectEnabled = true
+    - spec: boolean textAutocorrectEnabled = false
       pref: chat_text_autocorrect
 
     - spec: boolean hideJoinPartMessages = false
@@ -70,11 +70,11 @@ ChatSettings:
 NickAutocompleteSettings:
   pref_prefix: nick_autocomplete
   settings:
-    - spec: boolean showButton = false
+    - spec: boolean showButton = true
       getter: isButtonVisible
     - spec: boolean doubleTap = true
       getter: isDoubleTapEnabled
-    - spec: boolean suggestions = false
+    - spec: boolean suggestions = true
       getter: areSuggestionsEnabled
     - spec: boolean atSuggestions = true
       getter: areAtSuggestionsEnabled

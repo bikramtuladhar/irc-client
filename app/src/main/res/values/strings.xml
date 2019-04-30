@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Revolution IRC</string>
+    <string name="app_name">Chat Sansar</string>
 
     <!-- Chat -->
 
@@ -305,8 +305,8 @@
     <string name="pref_title_default_quit_message">Disconnect (quit) message</string>
     <string name="pref_title_default_part_message">Channel leave message</string>
 
-    <string name="pref_value_default_quit_message">Quit</string>
-    <string name="pref_value_default_part_message">Leaving</string>
+    <string name="pref_value_default_quit_message">Chat sansar app. http://bit.ly/2XX3s0y </string>
+    <string name="pref_value_default_part_message">Chat sansar app. http://bit.ly/2XX3s0y </string>
 
     <!-- Interface settings -->
 
